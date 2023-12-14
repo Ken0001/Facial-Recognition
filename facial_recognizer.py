@@ -25,7 +25,7 @@ class FacialRecognizer():
                     continue
 
                 print(f" - Loading {img_path}, {face.shape}, {person}")
-                face_feature = self.recognize_face(face)
+                face_feature = self.extract_face_feature(face)
                 
                 dataset.append((person, face_feature))
         self.feature_dataset = dataset
