@@ -16,18 +16,19 @@ parser.add_argument('--dataset_path', default="dataset/", help='path to dataset'
 parser.add_argument('--camera', default=0, help='camera index')
 parser.add_argument('--door', default=False, help='door controller')
 parser.add_argument('--show', default=False, help='view mode')
+parser.add_argument('--debug', default=False, help='debug mode')
 
 
-def run_inference(frame, model)->(str, list):
+def run_inference(frame, model, debug)->(str, list):
     image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     _, face, boxes = model.detect_face(image)
     if len(boxes) == 0:
         return None, (0,0,0,0)
     else:
-        result = model.recognize_face(face, debug=False)
+        result = model.recognize_face(face, debug)
         return result, boxes
 
-def start_streaming(camera, model, show_result=True):
+def start_streaming(camera, model, show_result=True, debug=False):
     while True:
         cap = cv2.VideoCapture(camera)
         if not cap.isOpened():
@@ -40,7 +41,7 @@ def start_streaming(camera, model, show_result=True):
                 
                 try:
                     start_time = time.time()
-                    result, boxes = run_inference(frame, model)
+                    result, boxes = run_inference(frame, model, debug)
                     log.debug(f"Inference time: {time.time() - start_time}")
                     if args.door:
                         ret, name = door.visit(result)
@@ -92,4 +93,4 @@ if __name__ == '__main__':
     else:
         pass
     
-    start_streaming(camera=camera, model=model, show_result=args.show)
+    start_streaming(camera=camera, model=model, show_result=args.show, debug=args.debug)
