@@ -1,0 +1,5 @@
+{
+    "_video": "rtsp://admin:Aa83446416!@192.168.50.3:554/rtspstream/channel=0/stream=1",
+    "video": "http://admin:admin@192.168.50.2/video.cgi?identify_key=984852984&pipe=0",
+    "open": "http://admin:admin@192.168.50.2/DP/doorunlock.ncgi?id=2635107228"
+}
