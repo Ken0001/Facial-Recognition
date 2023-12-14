@@ -61,10 +61,10 @@ def start_streaming(camera, model, show_result=True):
                     x2 = boxes[0][2]
                     y2 = boxes[0][3]
 
-                    cv2.rectangle(image, (x1, y1), (x2, y2), (214, 217, 8), 2, cv2.LINE_AA)
-                    cv2.putText(image, result, (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 2, (214, 217, 8), 2, cv2.LINE_AA)
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (214, 217, 8), 2, cv2.LINE_AA)
+                    cv2.putText(frame, result, (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 2, (214, 217, 8), 2, cv2.LINE_AA)
 
-                image = cv2.resize(image, (image.shape[1]//2, image.shape[0]//2))
+                image = cv2.resize(frame, (frame.shape[1]//2, frame.shape[0]//2))
                 cv2.imshow("Result", image)
                 if cv2.waitKey(1) == ord('q') or cv2.waitKey(1) == 27:
                     break
