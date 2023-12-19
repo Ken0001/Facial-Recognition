@@ -10,10 +10,11 @@ class DoorController():
         self.open_timer = 0
     
     def open(self, name):
-        if (time.time() - self.open_timer) < self.wait_time:
+        pass_time = time.time() - self.open_timer
+        if pass_time < self.wait_time:
             return
-        print(f"Open door for {name}")
-        response = requests.get(self.url)
+        print(f"=========Open door for {name}=========")
+        # response = requests.get(self.url)
         self.open_timer = time.time()
         
     def visit(self, text):
